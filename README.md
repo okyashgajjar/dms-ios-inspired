@@ -4,13 +4,36 @@ An iOS-inspired setup for [Dank Material Shell (DMS)](https://github.com/Dux-Lab
 
 This repo packages the configuration/theme/integration files needed to reproduce this setup state (not a fork of DMS shell source).
 
+## Screenshots
+
+|  |  |
+|---|---|
+| ![Notch / Island Bar](Screenshots/notch.png) | ![Control Panel](Screenshots/control-panel.png) |
+| **Notch / Island Bar** | **Control Panel** (`Mod+A`) |
+| ![App Launcher](Screenshots/app-selector.png) | ![Wallpaper Selector](Screenshots/wall-selector.png) |
+| **App Launcher** (`Mod+Space`) | **Wallpaper Selector** (`Mod+W`) |
+| ![Notifications](Screenshots/notification.png) | ![Settings](Screenshots/settings.png) |
+| **Notifications** (`Mod+N`) | **Settings** |
+| ![Power / Logout Menu](Screenshots/logout-menu.png) |  |
+| **Power / Logout Menu** |  |
+
+## RAM usage (measured)
+
+| Component | RAM (approx.) | Notes |
+|---|---:|---|
+| **DMS** (`qs` + `dms`) | **~655 MiB** | Shell UI + backend (cgroup, idle/light use) |
+| **Niri** | **~145 MiB** | Wayland compositor |
+| **DMS + Niri** | **~800 MiB** | Typical combined footprint for this setup |
+
+> Measured on this system (7.3 GiB RAM, Wayland/Niri). Actual usage varies with session uptime, widgets/activity, monitors, and workloads.
+
 ## What's included
 
 - `config/dms/settings.json` — DMS UI/layout/settings (iOS-inspired island bar, control center, widgets, blur enabled, dense/expressive styling, etc.)
 - `config/dms/themes/detroit67/` — custom `detroit67` theme
 - `config/dms/plugins.lock.json` — plugin lockfile
 - `config/dms/firefox.css` — optional Firefox styling
-- `config/systemd/user/dms.service.d/light.conf` — user service drop-in (runtime tuning + memory limits)
+- `config/systemd/user/dms.service.d/light.conf` — user service drop-in (runtime tuning env flags)
 - `config/niri/config.kdl` — Niri config used with this setup (sanitized for portability; review monitor/debug sections)
 - `config/niri/dms/*.kdl` — DMS/Niri integration snapshots (binds, layout, blur, window rules, colors, cursor, input, alttab). `outputs.kdl.example` is included as reference only (machine-specific).
 - `install.sh` — installer with timestamped backups
@@ -51,16 +74,15 @@ Media/brightness keys are also bound to `dms ipc` (audio, mpris, brightness). Se
 
 ### Git clone (recommended)
 ```bash
-git clone https://github.com/<your-user>/dms-ios-inspired.git
+git clone https://github.com/okyashgajjar/dms-ios-inspired.git
 cd dms-ios-inspired
 ```
 
 ### One-command install (after you host this repo)
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/<your-user>/dms-ios-inspired/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/okyashgajjar/dms-ios-inspired/main/install.sh)
 ```
 
-Replace `<your-user>` with your GitHub username/repo path.
 
 ## Install
 
@@ -80,11 +102,6 @@ The installer (with timestamped backups) will:
 
 **Important:** Review and adjust machine-specific Niri settings after install (monitor outputs/modes/positions, GPU debug options). `outputs.kdl.example` is provided for reference—create your own `~/.config/niri/dms/outputs.kdl` or configure outputs in Niri as needed.
 
-## State & portability notes
-
-- **Design preserved:** blur/transparency and iOS-inspired UI settings are included; the systemd drop-in only adds non-visual runtime tuning.
-- **Personal/machine-specific values removed:** `lockScreenWallpaperPath` is cleared, monitor/output config is not force-installed. Set your wallpaper and displays after install.
-- **Not vendored:** DMS/Quickshell binaries and shell code come from your installed packages; this repo applies configuration/integration on top.
 
 ## Uninstall / revert
 
