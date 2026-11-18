@@ -27,6 +27,13 @@ This repo packages the configuration/theme/integration files needed to reproduce
 
 > Measured on this system (7.3 GiB RAM, Wayland/Niri). Actual usage varies with session uptime, widgets/activity, monitors, and workloads.
 
+## Demo
+
+<video src="demo.mp4" controls muted playsinline width="100%"></video>
+
+If the video doesn't render inline, [open/download demo.mp4](demo.mp4).
+
+
 ## What's included
 
 - `config/dms/settings.json` — DMS UI/layout/settings (iOS-inspired island bar, control center, widgets, blur enabled, dense/expressive styling, etc.)
