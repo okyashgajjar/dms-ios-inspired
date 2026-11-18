@@ -17,6 +17,20 @@ This repo packages the configuration/theme/integration files needed to reproduce
 | ![Power / Logout Menu](Screenshots/logout-menu.png) |  |
 | **Power / Logout Menu** |  |
 
+
+## Download
+
+### Git clone (recommended)
+```bash
+git clone https://github.com/okyashgajjar/dms-ios-inspired.git
+cd dms-ios-inspired
+```
+
+### One-command install (after you host this repo)
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/okyashgajjar/dms-ios-inspired/main/install.sh)
+```
+
 ## RAM usage (measured)
 
 | Component | RAM (approx.) | Notes |
@@ -77,52 +91,4 @@ Media/brightness keys are also bound to `dms ipc` (audio, mpris, brightness). Se
 
 `config/niri/config.kdl` also includes personal overrides (e.g. `Mod+C` control center toggle, `Mod+Return` terminal `foot`, focus navigation) applied after DMS includes.
 
-## Download
-
-### Git clone (recommended)
-```bash
-git clone https://github.com/okyashgajjar/dms-ios-inspired.git
-cd dms-ios-inspired
-```
-
-### One-command install (after you host this repo)
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/okyashgajjar/dms-ios-inspired/main/install.sh)
-```
-
-
 ## Install
-
-From the repo directory:
-
-```bash
-chmod +x install.sh
-./install.sh
-```
-
-The installer (with timestamped backups) will:
-1. Install DMS theme/settings/plugin lock (+ optional `firefox.css`) into `~/.config/dms/`
-2. Install `systemd --user` drop-in into `~/.config/systemd/user/dms.service.d/light.conf`
-3. Install Niri integration files into `~/.config/niri/dms/` (snapshot; excludes machine-specific `outputs.kdl.example`)
-4. Install `~/.config/niri/config.kdl` (backup of existing config is created)
-5. Substitute local paths in `settings.json`, then `daemon-reload` and restart `dms.service` if present
-
-**Important:** Review and adjust machine-specific Niri settings after install (monitor outputs/modes/positions, GPU debug options). `outputs.kdl.example` is provided for reference—create your own `~/.config/niri/dms/outputs.kdl` or configure outputs in Niri as needed.
-
-
-## Uninstall / revert
-
-Restore from `.bak.*` backups created by the installer in:
-- `~/.config/dms/`
-- `~/.config/systemd/user/dms.service.d/`
-- `~/.config/niri/` and `~/.config/niri/dms/`
-
-Then reload/restart as needed:
-```bash
-systemctl --user daemon-reload && systemctl --user restart dms.service
-# reload/restart Niri session if you reverted Niri config
-```
-
-## License
-
-[MIT](LICENSE)
